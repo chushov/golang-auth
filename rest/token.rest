@@ -2,13 +2,12 @@
 
 @host = localhost:8080
 
-// Генерируем JWT-токен
-// Не забыть: отправляем запросы с помощью REST Client через VSCode 
+// Получаем JWT-токен
 POST http://{{host}}/api/token HTTP/1.1 content-type: application/json
 
 {
     "email": "chushov@yandex.ru", 
-    "password": "123465789"
+    "password": "1234567890"
 
 }
 

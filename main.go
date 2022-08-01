@@ -9,18 +9,15 @@ import (
 )
 
 func main() {
-	// Подключение к базе данных
-	database.Connect("root:10RTVx10RTVx@tcp(localhost:3306)/jwt_golang_auth?parseTime=true")
+	database.Connect("golang-auth:lD1hSN2fs6mVh1Sj1uC7j_9J@tcp(localhost:3306)/jwt_golang_auth?parseTime=true")
 	database.Migrate()
 
-	// Создание роутера
 	router := initRouter()
 	router.Run(":8080")
 }
 
 func initRouter() *gin.Engine {
 	router := gin.Default()
-	// Джин позволяет запихнуть необходимые роуты в группы
 
 	api := router.Group("/api")
 	{

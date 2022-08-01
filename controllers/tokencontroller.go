@@ -9,14 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Запрашиваем токен из заголовка
-
 type TokenRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
-
-// Генерируем JWT-токен для пользователя
 
 func GenerateToken(context *gin.Context) {
 	var request TokenRequest
@@ -36,7 +32,7 @@ func GenerateToken(context *gin.Context) {
 
 	credentialError := user.CheckPassword(request.Password)
 	if credentialError != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
+		context.JSON(http.StatusUnauthorized, gin.H{"error": "учетные данные не обнаружены"})
 		context.Abort()
 		return
 	}

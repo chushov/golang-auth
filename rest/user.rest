@@ -3,7 +3,6 @@
 @host = localhost:8080
 
 // Регистрируем пользователя
-// Не забыть: отправляем запросы с помощью REST Client через VSCode
 POST http://{{host}}/api/user/register HTTP/1.1 content-type: application/json
 
 {
@@ -13,5 +12,4 @@ POST http://{{host}}/api/user/register HTTP/1.1 content-type: application/json
     "password": "1234567890"
 
 }
-
 ###
