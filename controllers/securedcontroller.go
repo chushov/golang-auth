@@ -7,5 +7,5 @@ import (
 )
 
 func Ping(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"message": "токен валидненький, держи ответик"})
+	context.JSON(http.StatusOK, gin.H{"message": "токен валиден"})
 }
