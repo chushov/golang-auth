@@ -1,4 +1,4 @@
-package middlewares
+package service
 
 import (
 	"golang-auth/auth"

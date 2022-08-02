@@ -3,7 +3,7 @@ package main
 import (
 	"golang-auth/controllers"
 	"golang-auth/database"
-	"golang-auth/middlewares"
+	"golang-auth/service"
 
 	"github.com/gin-gonic/gin" // Юзаем HTTP-фреймворк
 )
@@ -13,7 +13,10 @@ func main() {
 	database.Migrate()
 
 	router := initRouter()
-	router.Run(":8080")
+	err := router.Run(":8080")
+	if err != nil {
+		return
+	}
 }
 
 func initRouter() *gin.Engine {
@@ -23,7 +26,7 @@ func initRouter() *gin.Engine {
 	{
 		api.POST("/token", controllers.GenerateToken)
 		api.POST("/user/register", controllers.RegisterUser)
-		secured := api.Group("/secured").Use(middlewares.Auth())
+		secured := api.Group("/secured").Use(service.Auth())
 		{
 			secured.GET("/ping", controllers.Ping)
 		}
