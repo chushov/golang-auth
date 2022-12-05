@@ -2,7 +2,7 @@ package models
 
 import (
 	"golang.org/x/crypto/bcrypt" // не хранить пароль в открытом виде (!)
-	"gorm.io/gorm"
+	"gorm.io/gorm"               // TODO: Найти аналог ORM
 )
 
 type User struct {

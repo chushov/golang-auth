@@ -5,7 +5,7 @@ import (
 	"golang-auth/database"
 	"golang-auth/service"
 
-	"github.com/gin-gonic/gin" // Юзаем HTTP-фреймворк
+	"github.com/gin-gonic/gin" // TODO: Найти аналог GIN-фреймворку
 )
 
 func main() {
