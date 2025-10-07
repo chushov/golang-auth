@@ -1,4 +1,3 @@
-
 # JWT-авторизация на языке Go
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
@@ -13,6 +12,48 @@
 - gorm
 - bcrypt
 - mysql, mongodb
+- Docker (multi-stage сборка)
+
+## Запуск с Docker
+
+Проект поддерживает запуск в Docker-контейнерах с использованием docker-compose для простого развертывания приложения вместе с MySQL.
+
+### Подготовка
+
+1. Убедитесь, что у вас установлены Docker и docker-compose
+2. Создайте файл `.env` на основе `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+3. Отредактируйте `.env` файл, установив необходимые переменные окружения
+
+### Запуск
+
+Для запуска всех сервисов (приложение и база данных) выполните:
+
+```bash
+docker-compose up -d
+```
+
+Приложение будет доступно на порту `8080`, MySQL на порту `3306`.
+
+### Управление контейнерами
+
+Остановка контейнеров:
+
+```bash
+docker-compose down
+```
+
+Остановка и удаление всех данных (включая volumes):
+
+```bash
+docker-compose down -v
+```
+
+**Важно:** Для production-окружения обязательно измените пароли и секретные ключи в `.env` файле!
 
 ## Установка и запуск
 
