@@ -1,0 +1,53 @@
+# Go build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go coverage
+coverage.out
+*.cov
+*.coverprofile
+
+# Go work/build caches (локальные)
+bin/
+build/
+dist/
+.tmp/
+.temp/
+
+# Vendor (если не используете в репо)
+# vendor/
+
+# GolangCI-Lint cache
+.golangci-lint/
+
+# IDE/editor
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.gz
+
+# Local env/config (если планируете .env)
+.env
+.env.*
+!.env.example
+
+# SQLite test DB files (если появятся)
+*.db
+*.sqlite
+*.sqlite3
+
+# HTTP client requests (GoLand)
+httpRequests/
+
