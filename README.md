@@ -108,8 +108,65 @@
 
 Посмотреть на факт создания учетных записей и переданные зашифрованные пароли можно прямо в базе данных. Удобнее всего смотреть через возможности Goland, подключившись к локальной или удаленной базе напрямую из интерфейса, указав порт и созданного для авторизации юзера и имя таблицы. Если имя таблицы не нравится или имя требуется зашифровать, не забудьте поменять название в коннекторе к базе данных в файле main.go.
 
+### Тестирование и CI
+
+Для запуска тестов:
+
+```bash
+make test
+```
+или
+```bash
+go test ./ ...
+```
+
+Для проверки качества кода и статического анализа:
+
+```bash
+make lint
+```
+
+В проекте реализованы:
+- Unit-тесты моделей, auth и базы (папки `models/`, `auth/`, `database/`),
+- Интеграционные тесты REST API (controllers/),
+- E2E-тест флоу регистрации – получение токена – защищённый эндпоинт,
+- Автоматический запуск тестов и линтинга через GitHub Actions на каждый push/pull request в master.
+
+Любой pull request считается принятым, только если все проверки CI проходят успешно.
+
+#### Edge Case тесты
+
+В каждый слой добавьте юнит- или интеграционный тест, проверяющий:
+
+- Некорректный email (не-unique, невалидный формат).
+- Пустой токен авторизации, невалидная схема заголовка.
+- Ошибки миграции БД (например, неверная модель).
+
+Пример: `TestRegisterUser_InvalidEmail`
+
+```go
+func TestRegisterUser_InvalidEmailFormat(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	setupTestDB()
+	router := gin.Default()
+	router.POST("/api/user/register", RegisterUser)
+
+	user := models.User{
+		Name:     "Name",
+		Username: "User",
+		Email:    "wrongformat", // невалидный адрес
+		Password: "password",
+	}
+	payload, _ := json.Marshal(user)
+	req, _ := http.NewRequest(http.MethodPost, "/api/user/register", bytes.NewBuffer(payload))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	router.ServeHTTP(rec, req)
+	assert.NotEqual(t, http.StatusCreated, rec.Code)
+}
+```
+
 ## Автор
 
 [@chushov](https://github.com/chushov)
-
-
