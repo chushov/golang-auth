@@ -6,9 +6,9 @@
 POST http://{{host}}/api/user/register HTTP/1.1 content-type: application/json
 
 {
-    "name": "dmitry chushov", 
-    "username": "chushov", 
-    "email": "chushov@yandex.ru", 
+    "name": "user username", 
+    "username": "username", 
+    "email": "user@mail.mail", 
     "password": "1234567890"
 
 }
